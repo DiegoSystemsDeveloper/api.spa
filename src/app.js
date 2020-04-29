@@ -11,9 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false })); //funcion que me permite pr
 
 //routes
 app.use('/api', require('./routes/index'));
-app.use('/', (req, res) => { res.send('Welcome to mi api') })
-
-//static files
+app.use('/', (req, res) => { res.send('Welcome to mi API!') })
 
 //listening server
 app.listen(app.get('port'), () => {

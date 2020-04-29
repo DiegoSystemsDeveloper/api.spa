@@ -29,6 +29,12 @@ const getServices = async(req, res) => {
     res.status(200).json(response.rows);
 }
 
+const getAppoinments = async(req, res) => {
+    const response = await pool.query('SELECT * FROM citas');
+    res.status(200).json(response.rows);
+}
+
+
 module.exports = {
     getManicurists,
     getCustomers,
