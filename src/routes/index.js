@@ -7,5 +7,6 @@ router.get('/customers', getCustomers);
 router.get('/products', getProducts);
 router.get('/services', getServices);
 router.get('/appoinments', getAppoinments);
+router.post('/appoinments');
 
 module.exports = router;

@@ -34,11 +34,25 @@ const getAppoinments = async(req, res) => {
     res.status(200).json(response.rows);
 }
 
+const insertAppoinment = async(req, res) => {
+    const { idCliente, idTrabajo } = req.body;
+    const response = await pool.query('insert into citas(idcliente, idtrabajo) values ($1,$2)', [idCliente, idTrabajo]);
+    console.log(response);
+    res.json({
+        message: 'appoinment added succesfully',
+        body: {
+            idCliente,
+            idTrabajo
+        }
+    })
+}
+
 
 module.exports = {
     getManicurists,
     getCustomers,
     getProducts,
     getServices,
-    getAppoinments
+    getAppoinments,
+    insertAppoinment
 }
