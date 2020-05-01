@@ -48,7 +48,7 @@ const insertAppoinment = async(req, res) => {
 
 const updateCustomer = async(req, res) => {
     const { id, phone } = req.body;
-    const response = await pool.query('update clientes set celular = $1 where id = $2', [id, phone]);
+    const response = await pool.query('update clientes set celular = $1 where id = $2', [phone, id]);
     console.log(response);
     res.json({
         message: 'customer updated succesfully',
