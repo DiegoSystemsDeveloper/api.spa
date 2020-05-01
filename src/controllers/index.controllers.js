@@ -39,5 +39,6 @@ module.exports = {
     getManicurists,
     getCustomers,
     getProducts,
-    getServices
+    getServices,
+    getAppoinments
 }
