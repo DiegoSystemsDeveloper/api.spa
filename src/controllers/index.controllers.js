@@ -1,5 +1,4 @@
 const { Pool } = require('pg');
-//postgres://svocaocakjrecw:1067e02488a53e4a7a6008e17165b36e6671d430250e314d534cdce0dc4d109b@ec2-52-87-135-240.compute-1.amazonaws.com:5432/d47rpsguqi90a5
 
 const pool = new Pool({
     host: 'ec2-52-87-135-240.compute-1.amazonaws.com',
@@ -47,6 +46,19 @@ const insertAppoinment = async(req, res) => {
     })
 }
 
+const updateCustomer = async(req, res) => {
+    const { id, phone } = req.body;
+    const response = await pool.query('update clientes set celular = $1 where id = $2', [id, phone]);
+    console.log(response);
+    res.json({
+        message: 'customer updated succesfully',
+        body: {
+            id,
+            phone
+        }
+    })
+}
+
 
 module.exports = {
     getManicurists,
@@ -54,5 +66,6 @@ module.exports = {
     getProducts,
     getServices,
     getAppoinments,
-    insertAppoinment
+    insertAppoinment,
+    updateCustomer
 }
