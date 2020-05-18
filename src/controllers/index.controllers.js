@@ -8,66 +8,25 @@ const pool = new Pool({
     port: '5432'
 })
 
-const getManicurists = async(req, res) => {
-    const response = await pool.query('SELECT * FROM manicurista');
-    res.status(200).json(response.rows);
-}
+const objManicurist = require('./models/manicurists.controller');
+const manicurist = new objManicurist(pool);
 
-const getCustomers = async(req, res) => {
-    const response = await pool.query('SELECT * FROM clientes');
-    res.status(200).json(response.rows);
-}
+const objCustomer = require('./models/customers.controller');
+const customer = new objCustomer(pool);
 
-const getProducts = async(req, res) => {
-    const response = await pool.query('SELECT * FROM productos');
-    res.status(200).json(response.rows);
-}
+const objAppoinment = require('./models/appoinments.controller');
+const appoinment = new objAppoinment(pool);
 
-const getServices = async(req, res) => {
-    const response = await pool.query('SELECT * FROM trabajos');
-    res.status(200).json(response.rows);
-}
+const objProduct = require('./models/products.controller');
+const product = new objProduct(pool);
 
-const getAppoinments = async(req, res) => {
-    const response = await pool.query('SELECT * FROM citas');
-    res.status(200).json(response.rows);
-}
-
-const insertAppoinment = async(req, res) => {
-    const { idCliente, idTrabajo } = req.body;
-    const response = await pool.query('insert into citas(idcliente, idtrabajo) values ($1,$2)', [idCliente, idTrabajo]);
-    console.log(response);
-    res.json({
-        message: 'appoinment added succesfully',
-        body: {
-            idCliente,
-            idTrabajo
-        }
-    })
-}
-
-const updateCustomer = async(req, res) => {
-    const id = req.params.id
-    const { phone } = req.body
-    const response = await pool.query(
-        'update clientes set celular = $1 where id = $2', [phone, id])
-    console.log(response)
-    res.json({
-        message: 'customer updated succesfully',
-        body: {
-            id,
-            phone
-        }
-    })
-}
-
+const objService = require('./models/services.controller');
+const service = new objService(pool)
 
 module.exports = {
-    getManicurists,
-    getCustomers,
-    getProducts,
-    getServices,
-    getAppoinments,
-    insertAppoinment,
-    updateCustomer
+    manicurist,
+    customer,
+    appoinment,
+    product,
+    service
 }

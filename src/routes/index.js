@@ -1,13 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const { getManicurists, getCustomers, getProducts, getServices, getAppoinments, insertAppoinment, updateCustomer } = require('../controllers/index.controllers');
+const {
+    manicurist,
+    customer,
+    appoinment,
+    product,
+    service
+} = require('../controllers/index.controllers');
 
-router.get('/manicurists', getManicurists);
-router.get('/customers', getCustomers);
-router.get('/products', getProducts);
-router.get('/services', getServices);
-router.get('/appoinments', getAppoinments);
-router.post('/appoinments', insertAppoinment);
-router.put('/customers/:id', updateCustomer);
+//manicurist routes
+router.get('/manicurists', manicurist.getManicurists);
+router.get('/manicurists/:id', manicurist.getManicuristCalendar)
+
+//product routes 
+router.get('/products', product.getProducts);
+
+//service routes
+router.get('/services', service.getServices);
+
+//appoinment routes
+router.get('/appoinments', appoinment.getAppoinments);
+router.post('/appoinments', appoinment.insertAppoinment);
+
+//customer routes
+router.get('/customers', customer.getCustomers);
 
 module.exports = router;
