@@ -19,6 +19,14 @@ class appoinment {
             }
         })
     }
+
+    deleteAppoinment = async(req, res) => {
+        const id = req.params.id;
+        await this.pool.query('delete from agenda_citas where idcita = $1', [id]);
+        const response = await this.pool.query('delete from citas where id = $1', [id]);
+        console.log(response);
+        res.json(`Appoinment ${id} deleted succesfully`)
+    }
 }
 
 module.exports = appoinment;
